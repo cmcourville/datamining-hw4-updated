@@ -20,7 +20,7 @@ def Terms_and_Conditions():
     '''
     #****************************************
     #* CHANGE CODE HERE
-    Read_and_Agree = False  #if you have read and agree with the term above, change "False" to "True".
+    Read_and_Agree = True  #if you have read and agree with the term above, change "False" to "True".
     #****************************************
     return Read_and_Agree
 
@@ -56,10 +56,10 @@ def compute_eigen_pairs(X):
     #########################################
     ## INSERT YOUR CODE HERE
 
-
-
-
-
+    Ep=[]
+    v,e = np.linalg.eigh(X)
+    for i, value in enumerate(v):
+        Ep.append((v[i], e[:,i]))
 
     #########################################
     return Ep
@@ -108,10 +108,11 @@ def sort_eigen_pairs(Ep, order = 'ascending'):
     #########################################
     ## INSERT YOUR CODE HERE
 
-
-
-
-
+    if (order == 'ascending') :
+        ascending = False 
+    else : 
+        ascending = True 
+    Ep = sorted(Ep, key=lambda x:x[0], reverse=ascending)
 
     #########################################
     return Ep 
