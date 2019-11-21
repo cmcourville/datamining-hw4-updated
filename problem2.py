@@ -40,7 +40,9 @@ def centering_X(X):
     #########################################
     ## INSERT YOUR CODE HERE
 
-    
+    n = np.shape(X)[0]
+    mu = np.dot((1/n)*np.ones(n).T, X)
+    Xc= X- mu
 
     #########################################
     return Xc, mu
@@ -65,6 +67,8 @@ def compute_C(Xc):
     #########################################
     ## INSERT YOUR CODE HERE
 
+    n = np.shape(Xc)[0]
+    C = (1/(n-1))*np.dot(Xc.T, Xc)
 
     #########################################
     return C
@@ -93,16 +97,14 @@ def compute_P(C,k):
     #########################################
     ## INSERT YOUR CODE HERE
 
-
-
-
-
-
+    eigenPairs = p1.compute_eigen_pairs(C)
+    sortedE = p1.sort_eigen_pairs(eigenPairs, False)
+    P = (np.vstack([x[1] for x in sortedE]).T)[:,:k]
 
     #########################################
     return P
 
-    ''' TEST: Now you can test the correctness of your code above by typing `nosetests -v test2.py:test_compute_P' in the terminal.  '''
+    ''' TEST: Now you can test the correctness of your code above by typing `nosetests s-v test2.py:test_compute_P' in the terminal.  '''
 
 
 
@@ -118,6 +120,8 @@ def compute_Xp(Xc,P):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
+    
+    Xp = Xc.dot(P)
 
     #########################################
     return Xp
@@ -144,16 +148,17 @@ def PCA(X, k=1):
     ## INSERT YOUR CODE HERE
 
     # centering matrix X 
-
+    center = centering_X(X)
+    Xc = center[0]
 
     # compute covariance matrix C
-
+    C = compute_C(Xc)
 
     # compute the projection matrix P 
-
+    P = compute_P(C, k)
 
     # project the data into lower dimension using projection matrix P and centered data matrix X
-
+    Xp = compute_Xp(Xc, P) 
 
     #########################################
     return Xp, P 

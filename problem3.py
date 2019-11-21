@@ -52,7 +52,9 @@ def vector_to_image(x):
     #########################################
     ## INSERT YOUR CODE HERE
 
-
+    row = int(np.sqrt(len(x)))
+    image = x.reshape(row,row)
+     
     #########################################
     return image
 
@@ -75,9 +77,11 @@ def load_dataset():
     #########################################
     ## INSERT YOUR CODE HERE
 
-
-
-
+    out = fetch_olivetti_faces(data_home=None, shuffle=False, random_state=0, download_if_missing=True)
+    X = out.data
+    images = out.images
+    y = out.target   
+    
     #########################################
     return X, y, images 
 
@@ -102,6 +106,8 @@ def compute_mu_image(X):
     #########################################
     ## INSERT YOUR CODE HERE
 
+    a = p2.centering_X(X)[1]
+    mu_image = vector_to_image(a)
 
     #########################################
     return mu_image
@@ -131,10 +137,13 @@ def compute_eigen_faces(X, k=20):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
+    Xp, P =p2.PCA(X,k)
+    P_images = []
 
-
-
-
+    for i in range(k):
+        curr = P[:,i]
+        curr = np.reshape(curr, (64,64))
+        P_images.append(curr)
 
     #########################################
     return P_images, Xp

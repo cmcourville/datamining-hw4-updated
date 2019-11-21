@@ -39,8 +39,10 @@ def compute_D(A):
 
     # degree vector of the nodes
 
+    v = np.sum(A, axis=0)
 
     # diagonal matrix
+    D= np.diag(v)
 
 
     #########################################
@@ -65,7 +67,7 @@ def compute_L(D,A):
 
     #########################################
     ## INSERT YOUR CODE HERE
-
+    L = D - A
     #########################################
     return L
 
@@ -93,11 +95,14 @@ def find_e2(L,tol= 1e-4):
     #########################################
     ## INSERT YOUR CODE HERE
 
-
-
-
-
-
+    ep = p1.compute_eigen_pairs(L)
+    sep = p1.sort_eigen_pairs(ep)
+    print(sep)
+    e2 =[]
+    for i in sep:
+        if (i<tol):
+            e2.append(i)
+    
     #########################################
     return e2 
 
@@ -120,6 +125,7 @@ def compute_x(e2):
     #########################################
     ## INSERT YOUR CODE HERE
 
+    x = e2[0]
 
 
     #########################################

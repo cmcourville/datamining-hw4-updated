@@ -116,8 +116,6 @@ def test_find_e2():
     e_true = np.array([-0.70710678, 0.70710678])
     assert np.allclose(e,e_true,atol=1e-2) or np.allclose(e,-e_true,atol=1e-2)
 
-
-
     L= np.diag((1, 0, 3)) 
     e = find_e2(L) 
     e_true= np.array([1,0,0])
