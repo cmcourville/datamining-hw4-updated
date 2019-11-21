@@ -20,7 +20,9 @@ def Terms_and_Conditions():
     '''
     #****************************************
     #* CHANGE CODE HERE
+
     Read_and_Agree = True  #if you have read and agree with the term above, change "False" to "True".
+    
     #****************************************
     return Read_and_Agree
 

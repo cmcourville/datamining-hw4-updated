@@ -98,7 +98,7 @@ def find_e2(L,tol= 1e-4):
     ep= p1.sort_eigen_pairs(ep)
 
     E = np.asarray([x[1] for x in ep])
-    V = np.asarray([x[0] for x in ep])
+    v = np.asarray([x[0] for x in ep])
    
     dec = 0
     while tol < 1:
