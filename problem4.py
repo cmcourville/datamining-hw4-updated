@@ -44,7 +44,8 @@ def compute_distance(Xp, q):
     #########################################
     ## INSERT YOUR CODE HERE
 
-    d = np.sqrt(((Xp-q)**2).sum(axis=1))
+    d = ((Xp-q)**2).sum(axis=1)
+    d = np.sqrt(d)
 
     #########################################
     return d
@@ -79,8 +80,8 @@ def face_recognition(Xp,q):
     #########################################
     ## INSERT YOUR CODE HERE
 
-    a = compute_distance(Xp, q)
-    ids = np.asarray(np.argsort(a))
+    dist = compute_distance(Xp, q)
+    ids = np.asarray(np.argsort(dist))
     
     #########################################
     return ids

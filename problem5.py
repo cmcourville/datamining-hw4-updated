@@ -38,12 +38,9 @@ def compute_D(A):
     ## INSERT YOUR CODE HERE
 
     # degree vector of the nodes
-
     v = np.sum(A, axis=0)
-
     # diagonal matrix
     D= np.diag(v)
-
 
     #########################################
     return D
@@ -66,8 +63,10 @@ def compute_L(D,A):
     '''
 
     #########################################
-    ## INSERT YOUR CODE HERE
+    ## INSERT YOUR CODE 
+    
     L = D - A
+    
     #########################################
     return L
 
@@ -94,22 +93,21 @@ def find_e2(L,tol= 1e-4):
 
     #########################################
     ## INSERT YOUR CODE HERE
-    ep= p1.compute_eigen_pairs(L)
-    ep= p1.sort_eigen_pairs(ep)
+    ep= p1.sort_eigen_pairs(p1.compute_eigen_pairs(L))
 
     E = np.asarray([x[1] for x in ep])
     v = np.asarray([x[0] for x in ep])
    
-    dec = 0
+    val = 0
     while tol < 1:
         tol *= 10
-        dec += 1
+        val += 1
     
-    v = np.around(v, dec)
+    v = np.around(v, val)
     minimum = float('inf')
     index = float('nan')
     for i in range(len(v)):
-        if 0 < v[i] < minimum:
+        if (0 < v[i] < minimum):
             minimum = v[i]
             index = i
 
