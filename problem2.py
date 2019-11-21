@@ -152,16 +152,16 @@ def PCA(X, k=1):
     Xc = center[0]
 
     # compute covariance matrix C
-    C = compute_C(Xc)
+    computeC = compute_C(Xc)
 
     # compute the projection matrix P 
-    P = compute_P(C, k)
+    computeP = compute_P(computeC, k)
 
     # project the data into lower dimension using projection matrix P and centered data matrix X
-    Xp = compute_Xp(Xc, P) 
+    Xp = compute_Xp(Xc, computeP) 
 
     #########################################
-    return Xp, P 
+    return Xp, computeP 
 
     ''' TEST: Now you can test the correctness of your code above by typing `nosetests -v test2.py:test_PCA' in the terminal.  '''
 
