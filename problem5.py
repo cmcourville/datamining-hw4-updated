@@ -94,14 +94,26 @@ def find_e2(L,tol= 1e-4):
 
     #########################################
     ## INSERT YOUR CODE HERE
+    ep= p1.compute_eigen_pairs(L)
+    ep= p1.sort_eigen_pairs(ep)
 
-    ep = p1.compute_eigen_pairs(L)
-    sep = p1.sort_eigen_pairs(ep)
-    print(sep)
-    e2 =[]
-    for i in sep:
-        if (i<tol):
-            e2.append(i)
+    E = np.asarray([x[1] for x in ep])
+    V = np.asarray([x[0] for x in ep])
+   
+    dec = 0
+    while tol < 1:
+        tol *= 10
+        dec += 1
+    
+    v = np.around(v, dec)
+    minimum = float('inf')
+    index = float('nan')
+    for i in range(len(v)):
+        if 0 < v[i] < minimum:
+            minimum = v[i]
+            index = i
+
+    e2 = E[:, index]
     
     #########################################
     return e2 
@@ -125,8 +137,9 @@ def compute_x(e2):
     #########################################
     ## INSERT YOUR CODE HERE
 
-    x = e2[0]
-
+    x = e2
+    x[x > 0] = 1
+    x[x <= 0] = 0
 
     #########################################
     return x
@@ -158,16 +171,16 @@ def spectral_clustering(A):
     ## INSERT YOUR CODE HERE
 
     # compute degree matrix
-
+    degreeMatrix = compute_D(A)
 
     # compute Laplacian matrix
-
+    laplacian = compute_L(degreeMatrix, A)
 
     # find the eigen vector with the smallest non-zero eigen value
-
+    smallestEV = find_e2(laplacian, tol=0.000001)
 
     # compute the graph partition
-
+    x = compute_x(smallestEV)
 
     #########################################
     return x 
